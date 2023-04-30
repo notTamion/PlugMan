@@ -1,9 +1,6 @@
 package de.tamion.discord;
 
-import de.tamion.discord.commands.DownloadPlugin;
-import de.tamion.discord.commands.Plugins;
-import de.tamion.discord.commands.TogglePlugin;
-import de.tamion.discord.commands.UploadPlugin;
+import de.tamion.discord.commands.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -28,6 +25,8 @@ public class DiscordMain {
                     .addEventListeners(new DownloadPlugin())
                     .addEventListeners(new Plugins())
                     .addEventListeners(new TogglePlugin())
+                    .addEventListeners(new DeleteConfig())
+                    .addEventListeners(new DisableAll())
                     .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                     .setStatus(OnlineStatus.ONLINE)
                     .setActivity(Activity.watching("Minecraft Server"))
@@ -49,6 +48,11 @@ public class DiscordMain {
                 .queue();
         jda.upsertCommand("toggleplugin", "Toggles Plugin on or off")
                 .addOption(OptionType.STRING, "name", "Name of the Plugin to toggle", true)
+                .queue();
+        jda.upsertCommand("deleteconfig", "Deletes Plugins configuration files")
+                .addOption(OptionType.STRING, "name", "Name of the Plugin", true)
+                .queue();
+        jda.upsertCommand("disableall", "Disables All Plugins")
                 .queue();
     }
     public static void shutdown() {
