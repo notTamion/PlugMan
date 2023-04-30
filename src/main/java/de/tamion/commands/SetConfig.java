@@ -25,6 +25,7 @@ public class SetConfig implements CommandExecutor {
                     pl.getConfig().set(args[1], args[2]);
                 }
                 pl.saveConfig();
+                pl.reloadConfig();
                 sender.sendMessage("Successfully set config");
             } else {
                 sender.sendMessage("Invalid Args!");
