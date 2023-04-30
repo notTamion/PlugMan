@@ -8,3 +8,4 @@ description: Allows you to manage and download Plugin
 commands:
   toggleplugin:
   deleteconfig:
+  setconfig:
