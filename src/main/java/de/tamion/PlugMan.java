@@ -1,6 +1,7 @@
 package de.tamion;
 
 import de.tamion.commands.DeleteConfig;
+import de.tamion.commands.ReloadPlugin;
 import de.tamion.commands.SetConfig;
 import de.tamion.commands.TogglePlugin;
 import org.bukkit.Bukkit;
@@ -18,6 +19,7 @@ public final class PlugMan extends JavaPlugin {
         getCommand("toggleplugin").setExecutor(new TogglePlugin());
         getCommand("deleteconfig").setExecutor(new DeleteConfig());
         getCommand("setconfig").setExecutor(new SetConfig());
+        getCommand("reloadplugin").setExecutor(new ReloadPlugin());
     }
 
     @Override
