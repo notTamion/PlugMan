@@ -11,16 +11,16 @@ import org.jetbrains.annotations.NotNull;
 public class EnableAll implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        if(sender.hasPermission("PlugMan.enableall")) {
-            PluginManager pluginManager = Bukkit.getPluginManager();
-            for(Plugin pl : pluginManager.getPlugins()) {
-                pluginManager.enablePlugin(pl);
-                sender.sendMessage(pl.getName() + " has been enabled");
-            }
-            sender.sendMessage("All Plugins successfully enabled");
-        } else {
+        if(!sender.hasPermission("PlugMan.enableall")) {
             sender.sendMessage("You aren't allowed to execute this command!");
+            return false;
         }
-        return false;
+        PluginManager pluginManager = Bukkit.getPluginManager();
+        for(Plugin pl : pluginManager.getPlugins()) {
+            pluginManager.enablePlugin(pl);
+            sender.sendMessage(pl.getName() + " has been enabled");
+        }
+        sender.sendMessage("All Plugins successfully enabled");
+        return true;
     }
 }
