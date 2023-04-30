@@ -26,6 +26,7 @@ public class DiscordMain {
                     .addEventListeners(new Plugins())
                     .addEventListeners(new TogglePlugin())
                     .addEventListeners(new DeleteConfig())
+                    .addEventListeners(new EnableAll())
                     .addEventListeners(new DisableAll())
                     .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                     .setStatus(OnlineStatus.ONLINE)
@@ -53,6 +54,8 @@ public class DiscordMain {
                 .addOption(OptionType.STRING, "name", "Name of the Plugin", true)
                 .queue();
         jda.upsertCommand("disableall", "Disables All Plugins")
+                .queue();
+        jda.upsertCommand("enableall", "Enables All Plugins")
                 .queue();
     }
     public static void shutdown() {
