@@ -17,7 +17,7 @@ public class TogglePlugin implements CommandExecutor {
                 String Pluginname = args[0];
                 PluginManager pluginManager = Bukkit.getPluginManager();
                 Plugin plugin = pluginManager.getPlugin(Pluginname);
-                if(plugin != null && plugin.getName() != "PlugMan") {
+                if(plugin != null && !plugin.getName().equals("PlugMan")) {
                     if(plugin.isEnabled()) {
                         pluginManager.disablePlugin(plugin);
                         sender.sendMessage(plugin.getName() + " has been successfully disabled");
