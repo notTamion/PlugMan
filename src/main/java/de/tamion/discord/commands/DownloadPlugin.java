@@ -54,9 +54,8 @@ public class DownloadPlugin extends ListenerAdapter {
                 e.getHook().sendMessageEmbeds(eb.build()).setEphemeral(true).queue();
             } catch (Exception ex) {
                 eb.setColor(Color.RED);
-                eb.setTitle("Something went wrong! check console for error logs");
+                eb.setTitle("Invalid URL!");
                 e.getHook().sendMessageEmbeds(eb.build()).setEphemeral(true).queue();
-                ex.printStackTrace();
             }
         }
     }
