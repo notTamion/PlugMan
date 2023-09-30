@@ -1,6 +1,7 @@
 package de.tamion.discord;
 
 import de.tamion.discord.commands.DownloadPlugin;
+import de.tamion.discord.commands.Plugins;
 import de.tamion.discord.commands.UploadPlugin;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -24,6 +25,7 @@ public class DiscordMain {
             jda = JDABuilder.createDefault(token)
                     .addEventListeners(new UploadPlugin())
                     .addEventListeners(new DownloadPlugin())
+                    .addEventListeners(new Plugins())
                     .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                     .setStatus(OnlineStatus.ONLINE)
                     .setActivity(Activity.watching("Minecraft Server"))
@@ -40,6 +42,8 @@ public class DiscordMain {
         jda.upsertCommand("downloadplugin", "downloads plugin onto server")
                 .addOption(OptionType.STRING, "url", "File from URL to upload", true)
                 .addOption(OptionType.STRING, "name", "Name the file shall have", true)
+                .queue();
+        jda.upsertCommand("plugins", "Lists Plugins")
                 .queue();
     }
     public static void shutdown() {

@@ -17,7 +17,7 @@ public class DownloadPlugin extends ListenerAdapter {
             e.deferReply().queue();
             if(!e.getMember().hasPermission(Permission.ADMINISTRATOR)) {
                 if (!e.getMember().getRoles().containsAll(e.getGuild().getRolesByName("PluginPerms", true)) || e.getGuild().getRolesByName("PluginPerms", true).isEmpty()) {
-                    e.getHook().sendMessage("You aren't allowed to upload Plugins!").setEphemeral(true).queue();
+                    e.getHook().sendMessage("You aren't allowed to do that!").setEphemeral(true).queue();
                     return;
                 }
             }
