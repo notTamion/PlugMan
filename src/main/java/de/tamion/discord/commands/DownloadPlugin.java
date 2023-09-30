@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.net.URL;
 

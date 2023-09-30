@@ -27,16 +27,16 @@ public class TogglePlugin extends ListenerAdapter {
             }
             PluginManager pluginManager = Bukkit.getPluginManager();
             Plugin plugin = pluginManager.getPlugin(name.getAsString());
-            if(plugin != null && !plugin.getName().equals("PlugMan")) {
-                if(plugin.isEnabled()) {
-                    pluginManager.disablePlugin(plugin);
-                    e.getHook().sendMessage(plugin.getName() + " has been successfully disabled").setEphemeral(true).queue();
-                } else {
-                    pluginManager.enablePlugin(plugin);
-                    e.getHook().sendMessage(plugin.getName() + " has been successfully enabled").setEphemeral(true).queue();
-                }
-            } else {
+            if(plugin == null || plugin.getName().equals("PlugMan")) {
                 e.getHook().sendMessage("Plugin doesn't exist").setEphemeral(true).queue();
+                return;
+            }
+            if(plugin.isEnabled()) {
+                pluginManager.disablePlugin(plugin);
+                e.getHook().sendMessage(plugin.getName() + " has been successfully disabled").setEphemeral(true).queue();
+            } else {
+                pluginManager.enablePlugin(plugin);
+                e.getHook().sendMessage(plugin.getName() + " has been successfully enabled").setEphemeral(true).queue();
             }
         }
     }
