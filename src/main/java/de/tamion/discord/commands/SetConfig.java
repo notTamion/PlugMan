@@ -1,5 +1,6 @@
 package de.tamion.discord.commands;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -9,14 +10,19 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
+
 public class SetConfig extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent e) {
         if(e.getName().equals("setconfig")) {
             e.deferReply().queue();
+            EmbedBuilder eb = new EmbedBuilder();
             if (!e.getMember().hasPermission(Permission.ADMINISTRATOR)) {
                 if (!e.getMember().getRoles().containsAll(e.getGuild().getRolesByName("PluginPerms", true)) || e.getGuild().getRolesByName("PluginPerms", true).isEmpty()) {
-                    e.getHook().sendMessage("You aren't allowed to do that!").setEphemeral(true).queue();
+                    eb.setColor(Color.RED);
+                    eb.setTitle("All Plugins successfully disabled");
+                    e.getHook().sendMessageEmbeds(eb.build()).setEphemeral(true).queue();
                     return;
                 }
             }
@@ -24,21 +30,29 @@ public class SetConfig extends ListenerAdapter {
             OptionMapping key = e.getOption("key");
             OptionMapping value = e.getOption("value");
             if (pluginname == null) {
-                e.getHook().sendMessage("Please provide a valid Plugin Name").queue();
+                eb.setColor(Color.RED);
+                eb.setTitle("Please provide a valid Plugin Name");
+                e.getHook().sendMessageEmbeds(eb.build()).setEphemeral(true).queue();
                 return;
             }
             if (key == null) {
-                e.getHook().sendMessage("Please provide a valid key").queue();
+                eb.setColor(Color.RED);
+                eb.setTitle("Please provide a valid key");
+                e.getHook().sendMessageEmbeds(eb.build()).setEphemeral(true).queue();
                 return;
             }
             if (value == null) {
-                e.getHook().sendMessage("Please provide a valid value").queue();
+                eb.setColor(Color.RED);
+                eb.setTitle("Please provide a valid value");
+                e.getHook().sendMessageEmbeds(eb.build()).setEphemeral(true).queue();
                 return;
             }
             PluginManager pluginManager = Bukkit.getPluginManager();
             Plugin pl = pluginManager.getPlugin(pluginname.getAsString());
             if(pl == null) {
-                e.getHook().sendMessage("Plugin doesn't exist").setEphemeral(true).queue();
+                eb.setColor(Color.RED);
+                eb.setTitle("Plugin doesn't exist");
+                e.getHook().sendMessageEmbeds(eb.build()).setEphemeral(true).queue();
                 return;
             }
             if(value.getAsString().equalsIgnoreCase("true") || value.getAsString().equalsIgnoreCase("false")) {
@@ -48,7 +62,9 @@ public class SetConfig extends ListenerAdapter {
             }
             pl.saveConfig();
             pl.reloadConfig();
-            e.getHook().sendMessage("Successfully set config").setEphemeral(true).queue();
+            eb.setColor(Color.GREEN);
+            eb.setTitle("Successfully set config");
+            e.getHook().sendMessageEmbeds(eb.build()).setEphemeral(true).queue();
         }
     }
 }
