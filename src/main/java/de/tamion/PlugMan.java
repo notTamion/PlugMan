@@ -19,6 +19,7 @@ public final class PlugMan extends JavaPlugin {
         getCommand("reloadplugin").setExecutor(new ReloadPlugin());
         getCommand("disableall").setExecutor(new DisableAll());
         getCommand("enableall").setExecutor(new EnableAll());
+        getCommand("downloadplugin").setExecutor(new DowloadPlugin());
     }
 
     @Override
