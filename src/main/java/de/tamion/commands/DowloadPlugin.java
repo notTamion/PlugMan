@@ -30,8 +30,7 @@ public class DowloadPlugin implements CommandExecutor {
             sender.sendMessage("Successfully downloaded!");
             return true;
         } catch (Exception e) {
-            sender.sendMessage("Something went wrong. Check console for Error logs");
-            e.printStackTrace();
+            sender.sendMessage("Invalid URL!");
         }
         return false;
     }
