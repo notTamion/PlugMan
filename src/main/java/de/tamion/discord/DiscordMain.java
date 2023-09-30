@@ -29,6 +29,7 @@ public class DiscordMain {
                     .addEventListeners(new EnableAll())
                     .addEventListeners(new DisableAll())
                     .addEventListeners(new ReloadPlugin())
+                    .addEventListeners(new SetConfig())
                     .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                     .setStatus(OnlineStatus.ONLINE)
                     .setActivity(Activity.watching("Minecraft Server"))
@@ -60,6 +61,11 @@ public class DiscordMain {
                 .queue();
         jda.upsertCommand("reloadplugin", "Reloads Plugin")
                 .addOption(OptionType.STRING, "name", "Name of the Plugin", true)
+                .queue();
+        jda.upsertCommand("setconfig", "Reloads Plugin")
+                .addOption(OptionType.STRING, "plugin", "Name of the Plugin", true)
+                .addOption(OptionType.STRING, "key", "Key", true)
+                .addOption(OptionType.STRING, "value", "value to put", true)
                 .queue();
     }
     public static void shutdown() {
