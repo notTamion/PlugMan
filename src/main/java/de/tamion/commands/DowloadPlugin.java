@@ -21,6 +21,10 @@ public class DowloadPlugin implements CommandExecutor {
         }
         File fl = new File("./plugins/" + args[1]);
         try {
+            if(args[0].startsWith("https://www.spigotmc.org/resources/")) {
+                String[] uria = args[0].replaceAll("https://www.spigotmc.org/resources/", "").split("\\.");
+                args[0] = "https://api.spiget.org/v2/resources/" + uria[uria.length-1].replaceAll("/", "") + "/download";
+            }
             URL url = new URL(args[0]);
             FileUtils.copyURLToFile(url, fl);
             sender.sendMessage("Successfully downloaded!");

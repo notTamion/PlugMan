@@ -31,7 +31,12 @@ public class DownloadPlugin extends ListenerAdapter {
                 return;
             }
             try {
-                URL url = new URL(urls.getAsString());
+                String uri = urls.getAsString();
+                if(urls.getAsString().startsWith("https://www.spigotmc.org/resources/")) {
+                    String[] uria = urls.getAsString().replaceAll("https://www.spigotmc.org/resources/", "").split("\\.");
+                    uri = "https://api.spiget.org/v2/resources/" + uria[uria.length-1].replaceAll("/", "") + "/download";
+                }
+                URL url = new URL(uri);
                 File fl = new File("./plugins/" + name.getAsString());
                 FileUtils.copyURLToFile(url, fl);
                 e.getHook().sendMessage("Successfully downloaded Plugin").setEphemeral(true).queue();
