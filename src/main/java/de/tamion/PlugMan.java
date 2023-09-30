@@ -1,6 +1,7 @@
 package de.tamion;
 
 import de.tamion.commands.*;
+import de.tamion.discord.DiscordMain;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,6 +13,7 @@ public final class PlugMan extends JavaPlugin {
     public void onEnable() {
         PluginManager pluginManager = Bukkit.getPluginManager();
         plugin = this;
+        DiscordMain.startup();
 
         getCommand("toggleplugin").setExecutor(new TogglePlugin());
         getCommand("deleteconfig").setExecutor(new DeleteConfig());
@@ -24,7 +26,7 @@ public final class PlugMan extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        DiscordMain.shutdown();
     }
 
     public static PlugMan getPlugin() {
