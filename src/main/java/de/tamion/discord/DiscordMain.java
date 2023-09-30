@@ -1,6 +1,7 @@
 package de.tamion.discord;
 
 import de.tamion.discord.commands.DownloadPlugin;
+import de.tamion.discord.commands.UploadPlugin;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -21,6 +22,7 @@ public class DiscordMain {
             }
             String token = FileUtils.readFileToString(tokenfl);
             jda = JDABuilder.createDefault(token)
+                    .addEventListeners(new UploadPlugin())
                     .addEventListeners(new DownloadPlugin())
                     .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                     .setStatus(OnlineStatus.ONLINE)
@@ -31,8 +33,12 @@ public class DiscordMain {
             throw new RuntimeException(e);
         }
         System.out.println("Bot Started");
-        jda.upsertCommand("downloadplugin", "Downloads plugin onto server")
-                .addOption(OptionType.ATTACHMENT, "file", "File to download", true)
+        jda.upsertCommand("uploadplugin", "Uploads plugin onto server")
+                .addOption(OptionType.ATTACHMENT, "file", "File to upload", true)
+                .addOption(OptionType.STRING, "name", "Name the file shall have", true)
+                .queue();
+        jda.upsertCommand("downloadplugin", "downloads plugin onto server")
+                .addOption(OptionType.STRING, "url", "File from URL to upload", true)
                 .addOption(OptionType.STRING, "name", "Name the file shall have", true)
                 .queue();
     }
