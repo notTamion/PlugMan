@@ -1,6 +1,7 @@
 package de.tamion;
 
 import de.tamion.commands.DeleteConfig;
+import de.tamion.commands.SetConfig;
 import de.tamion.commands.TogglePlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -16,6 +17,7 @@ public final class PlugMan extends JavaPlugin {
 
         getCommand("toggleplugin").setExecutor(new TogglePlugin());
         getCommand("deleteconfig").setExecutor(new DeleteConfig());
+        getCommand("setconfig").setExecutor(new SetConfig());
     }
 
     @Override
