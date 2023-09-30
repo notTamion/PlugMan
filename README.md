@@ -14,7 +14,7 @@ To use a DiscordBot you have to
 3. Paste the Bot Token into the Text file
 4. Restart/Reload your Server and test it out
 
-Currently, Only Users with the Administrator Permission or the Role "PluginPerms"(You have to create this one yourself, I recommend turning off all permissions and putting it at the bottom of the role list) can use Discord Commands.\
+Currently, Only Users with the Administrator Permission or the Role "PluginPerms"(You have to create this one yourself, I recommend turning off all permissions and putting it at the bottom of the role list) can use Discord Commands.
 ### NOTE: Using a Discord Bot is Optional, you don't have to use one.
 ### Contributing
 If you want to contribute to this Project, create a fork and open a pull request after you have made your changes!
